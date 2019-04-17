@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.post{
+    margin-bottom:12px;
+}
+
+.card-header > .post-name{
+    color:#047503;
+} 
+  
