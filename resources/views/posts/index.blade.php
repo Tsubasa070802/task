@@ -26,6 +26,9 @@
                             </div>
                         @endif
                     </div>
+                    <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
+                        more
+                    </a>
                 </div>
             @endforeach
         </div>

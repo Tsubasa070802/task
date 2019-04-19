@@ -6,4 +6,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('posts', 'PostController', ['except' => ['show', 'edit', 'update', 'destroy']])->middleware('auth');
+Route::resource('posts', 'PostController', ['except' => []])->middleware('auth');
+Route::resource('comments', 'CommentsController', ['only' => ['store']]);
