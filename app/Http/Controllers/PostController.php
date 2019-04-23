@@ -40,7 +40,7 @@ class PostController extends Controller
         return redirect('posts');
     }
     
-     public function index()
+    public function index()
     {
         $posts = Post::latest()->paginate(5);
         return view('posts.index', ['posts' => $posts]);
@@ -61,18 +61,32 @@ class PostController extends Controller
         
          return view('posts.edit', [
         'post' => $post,
-    ]);
+        ]);
     }
 
     public function update($post_id, Request $request)
     {
         $params = $request->validate([
-            'title' => 'required|max:50',
             'body' => 'required|max:2000',
         ]);
     
         $post = Post::findOrFail($post_id);
         $post->fill($params)->save();
     
-        return redirect()->route('posts.show', ['post' => $post]);}
+        return redirect('posts');
+        
+    }
+        
+    
+    public function destroy($post_id)
+    {
+        $post = Post::findOrFail($post_id);
+    
+        \DB::transaction(function () use ($post) {
+            $post->comments()->delete();
+            $post->delete();
+        });
+    
+        return redirect('posts');
+    }    
  }
