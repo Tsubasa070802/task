@@ -15,12 +15,16 @@ class PostController extends Controller
     
     public function create()
     {
-         return view('posts.create', ['user' => Auth::user()]);
+        return view('posts.create', ['user' => Auth::user()]);
     }
 
    
     public function store(Request $request)
-    {
+    {   
+        $params = $request->validate([
+            'body' => 'required|max:200',
+        ]);
+        
         $post = new Post;
         
         $form = $request->all();
@@ -67,7 +71,7 @@ class PostController extends Controller
     public function update($post_id, Request $request)
     {
         $params = $request->validate([
-            'body' => 'required|max:2000',
+            'body' => 'required|max:200',
         ]);
     
         $post = Post::findOrFail($post_id);

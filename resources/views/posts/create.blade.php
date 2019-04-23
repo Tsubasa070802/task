@@ -13,6 +13,11 @@
                     </div>
                     <div class='col-md-8 form-group'>
                         <textarea name="body" class="form-control" value="{{ old('body') }}" rows="20"></textarea>
+                        @if ($errors->has('body'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('body') }}
+                            </div>
+                        @endif
                     </div>
 
                     <label>
